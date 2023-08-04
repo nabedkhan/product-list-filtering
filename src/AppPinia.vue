@@ -18,12 +18,33 @@
     </div>
 
     <!-- PAGINATION BLOCK -->
-    <Pagination
-      :currentPage="pageIndex"
-      :pageCount="pageCount"
-      @prev="handlePrevPage()"
-      @next="handleNextPage()"
-    />
+    <ul class="inline-flex -space-x-px text-sm">
+      <li>
+        <button
+          @click="handlePrevPage()"
+          class="flex items-center justify-center h-8 px-3 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+        >
+          Previous
+        </button>
+      </li>
+
+      <li v-for="page in pageCount" :key="page">
+        <button
+          class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+        >
+          {{ page }}
+        </button>
+      </li>
+
+      <li>
+        <button
+          @click="handleNextPage()"
+          class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+        >
+          Next
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -34,10 +55,9 @@ import { categories } from "./data/categories";
 import Table from "./components/Table.vue";
 import TableFilterView from "./components/actions/TableFilterView.vue";
 import TableFilterActions from "./components/actions/TableFilterActions.vue";
-import Pagination from "./components/Pagination.vue";
 
 export default {
-  components: { Table, TableFilterActions, TableFilterView, Pagination },
+  components: { Table, TableFilterActions, TableFilterView },
   data() {
     return {
       pageSize: 5,

@@ -1,10 +1,10 @@
 <template>
   <div class="flex items-center gap-4">
-    <div class="max-w-xs w-full">
+    <div class="w-full max-w-xs">
       <select
         :value="modelValue.category"
         @input="updateValue('category', $event.target.value)"
-        class="bg-gray-50 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
+        class="w-full p-3 text-sm text-gray-800 border border-gray-300 rounded-lg outline-none bg-gray-50"
       >
         <option selected value="">Category</option>
         <option
@@ -17,11 +17,11 @@
       </select>
     </div>
 
-    <div class="max-w-xs w-full">
+    <div class="w-full max-w-xs">
       <select
         :value="modelValue.sort"
         @input="updateValue('sort', $event.target.value)"
-        class="bg-gray-50 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg p-3 w-full"
+        class="w-full p-3 text-sm text-gray-800 border border-gray-300 rounded-lg outline-none bg-gray-50"
       >
         <option selected value="">Sort By Price</option>
         <option value="low-high">Low to High</option>
@@ -34,7 +34,7 @@
         type="text"
         :value="modelValue.search"
         @input="updateValue('search', $event.target.value)"
-        class="bg-gray-50 border border-gray-300 outline-none text-gray-800 text-sm rounded-lg block w-full p-3"
+        class="block w-full p-3 text-sm text-gray-800 border border-gray-300 rounded-lg outline-none bg-gray-50"
         placeholder="Search product by name"
       />
     </div>

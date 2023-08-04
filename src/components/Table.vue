@@ -20,7 +20,7 @@
 
       <!-- NOT FOUND PRODUCT MESSAGE -->
       <tr v-if="products.length === 0">
-        <td colspan="5" class="bg-gray-900 py-24 text-center">
+        <td colspan="5" class="py-24 text-center bg-gray-900">
           <p class="text-2xl">Product Not Found!</p>
         </td>
       </tr>

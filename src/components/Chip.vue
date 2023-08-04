@@ -1,6 +1,6 @@
 <template>
   <span
-    class="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-grey-800 bg-white rounded-md"
+    class="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium bg-white rounded-md text-grey-800"
   >
     {{ title }}
 
