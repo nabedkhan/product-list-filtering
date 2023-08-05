@@ -1,16 +1,6 @@
 <template>
   <tr>
     <td class="px-6 py-4">
-      <input
-        id="select"
-        type="checkbox"
-        :checked="selected.includes(product.id)"
-        @input="handleSelectRow($event, product.id)"
-        class="w-4 h-4"
-      />
-    </td>
-
-    <td class="px-6 py-4">
       <img
         class="w-20 h-20 rounded"
         :src="product.image"
@@ -29,14 +19,17 @@
     <td class="px-6 py-4">${{ product.price }}</td>
 
     <td class="px-6 py-4 text-2xl">
-      <span class="cursor-pointer" @click="handleDeleteProduct(product.id)">
-        &times;
-      </span>
+      <span class="cursor-pointer" @click="handleDeleteProduct(product.id)"
+        >&times;</span
+      >
     </td>
   </tr>
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useProductsStore } from "../store/products";
+
 export default {
   props: {
     product: {
@@ -55,10 +48,8 @@ export default {
     },
   },
 
-  inject: {
-    handleDeleteProduct: { default: () => {} },
-    selected: { default: [] },
-    handleSelectRow: { default: () => {} },
+  computed: {
+    ...mapState(useProductsStore, ["handleDeleteProduct"]),
   },
 };
 </script>

@@ -1,53 +1,21 @@
-<template>
-  <div class="container mx-auto my-8">
-    <div class="p-4 py-5 mb-10 bg-gray-800 rounded-xl">
-      <!-- FILTER ACTIONS -->
-      <TableFilterActions v-model="filter" :categories="categories" />
+import { defineStore } from "pinia";
+import { products } from "../data/products";
+import { categories } from "../data/categories";
 
-      <!-- FILTER APPLIED VIEWER -->
-      <TableFilterView
-        v-if="filterApplied"
-        :filter="filter"
-        :handleDeleteFilter="handleDeleteFilter"
-      />
-    </div>
-
-    <!-- PRODUCT TABLE BLOCK -->
-    <div class="relative py-5 overflow-x-auto bg-gray-800 rounded-xl">
-      <Table />
-    </div>
-
-    <!-- PAGINATION BLOCK -->
-    <Pagination
-      :currentPage="pageIndex"
-      :pageCount="pageCount"
-      @prev="handlePrevPage()"
-      @next="handleNextPage()"
-    />
-  </div>
-</template>
-
-<script>
-import { products } from "./data/products";
-import { categories } from "./data/categories";
-// COMPONENTS
-import Table from "./pinia-components/Table.vue";
-import TableFilterView from "./pinia-components/actions/TableFilterView.vue";
-import TableFilterActions from "./pinia-components/actions/TableFilterActions.vue";
-import Pagination from "./pinia-components/Pagination.vue";
-
-export default {
-  components: { Table, TableFilterActions, TableFilterView, Pagination },
-  data() {
+export const useProductsStore = defineStore("products", {
+  state: () => {
     return {
+      products,
+      categories,
       pageSize: 5,
       pageIndex: 1,
-      products: [...products],
-      categories: [...categories],
       filter: { category: "", sort: "", search: "" },
     };
   },
-  methods: {
+  actions: {
+    handleDeleteProduct(id) {
+      this.products = this.products.filter((item) => item.id !== id);
+    },
     handleDeleteFilter(key) {
       this.filter[key] = "";
     },
@@ -63,7 +31,8 @@ export default {
       }
     },
   },
-  computed: {
+
+  getters: {
     filterApplied() {
       const keys = Object.keys(this.filter);
       return keys.filter((item) => this.filter[item]).length > 0;
@@ -111,5 +80,4 @@ export default {
       return this.filteredProducts.slice(firstIndex, lastIndex);
     },
   },
-};
-</script>
+});

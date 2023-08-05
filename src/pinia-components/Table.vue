@@ -3,17 +3,6 @@
     <!-- TABLE HEAD BLOCK -->
     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
       <tr>
-        <th scope="col" class="px-6 py-3">
-          <input
-            id="select"
-            type="checkbox"
-            class="w-4 h-4"
-            @input="handleSelectAllRow($event)"
-            :disabled="products.length === 0"
-            :indeterminate="selected.length > 0"
-          />
-        </th>
-
         <th v-for="head in tableHead" :key="head" scope="col" class="px-6 py-3">
           {{ head }}
         </th>
@@ -40,13 +29,12 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
 import TableItem from "./TableItem.vue";
+import { useProductsStore } from "../store/products";
 
 export default {
   components: { TableItem },
-  props: {
-    products: { type: Array, required: true, default: [] },
-  },
 
   data() {
     return {
@@ -60,6 +48,8 @@ export default {
     };
   },
 
-  inject: ["selected", "handleSelectAllRow"],
+  computed: {
+    ...mapState(useProductsStore, ["products"]),
+  },
 };
 </script>

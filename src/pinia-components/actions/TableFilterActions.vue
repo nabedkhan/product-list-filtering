@@ -2,7 +2,6 @@
   <div class="flex items-center gap-4">
     <div class="w-full max-w-xs">
       <select
-        id="category"
         :value="modelValue.category"
         @input="updateValue('category', $event.target.value)"
         class="w-full p-3 text-sm text-gray-800 border border-gray-300 rounded-lg outline-none bg-gray-50"
@@ -20,7 +19,6 @@
 
     <div class="w-full max-w-xs">
       <select
-        id="sort"
         :value="modelValue.sort"
         @input="updateValue('sort', $event.target.value)"
         class="w-full p-3 text-sm text-gray-800 border border-gray-300 rounded-lg outline-none bg-gray-50"
