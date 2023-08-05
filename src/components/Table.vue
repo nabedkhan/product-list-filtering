@@ -1,5 +1,5 @@
 <template>
-  <table class="w-full text-sm text-left text-white">
+  <table class="w-full text-sm text-left text-white min-w-[60rem]">
     <!-- TABLE HEAD BLOCK -->
     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
       <tr>
@@ -7,7 +7,7 @@
           <input
             id="select"
             type="checkbox"
-            class="w-4 h-4"
+            class="w-4 h-4 text-blue-600 bg-transparent border-gray-400 rounded focus:ring-offset-gray-50 focus:ring-1"
             @input="handleSelectAllRow($event)"
             :disabled="products.length === 0"
             :indeterminate="selected.length > 0"
@@ -31,7 +31,7 @@
 
       <!-- NOT FOUND PRODUCT MESSAGE -->
       <tr v-if="products.length === 0">
-        <td colspan="5" class="py-24 text-center bg-gray-900">
+        <td colspan="7" class="py-24 text-center bg-gray-900">
           <p class="text-2xl">Product Not Found!</p>
         </td>
       </tr>
@@ -55,6 +55,7 @@ export default {
         "Product Name",
         "Category",
         "Price",
+        "Rating",
         "Action",
       ],
     };
