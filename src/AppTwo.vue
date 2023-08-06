@@ -10,26 +10,13 @@
 
     <!-- PRODUCT TABLE BLOCK -->
     <div class="relative py-5 overflow-x-auto bg-gray-800 rounded-xl">
-      <div
-        class="flex items-center justify-between px-4 pb-4"
-        v-if="selected.length > 0"
-      >
-        <p class="font-medium text-slate-200">{{ selected.length }} Selected</p>
-        <button
-          class="p-1 rounded-full ring-1 ring-gray-700"
-          @click="handleDeleteSelectedProduct()"
-        >
-          <svg fill="none" viewBox="0 0 24 24" class="w-6 h-6 stroke-slate-200">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 12v5M14 12v5M4 7h16M6 10v8a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-8M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2H9V5Z"
-            />
-          </svg>
-        </button>
-      </div>
+      <!-- TABLE TOOLBAR AREA -->
+      <TableToolbar
+        :selected="selected"
+        :handleDeleteSelectedProduct="handleDeleteSelectedProduct"
+      />
 
+      <!-- MAIN TABLE AREA -->
       <Table :products="filteredProductsWithPagination" />
     </div>
 
@@ -44,6 +31,7 @@
 </template>
 
 <script>
+import { computed } from "vue";
 import Swal from "sweetalert2";
 import { products } from "./data/products";
 import { categories } from "./data/categories";
@@ -51,11 +39,17 @@ import { categories } from "./data/categories";
 import Table from "./components/Table.vue";
 import TableFilterView from "./components/actions/TableFilterView.vue";
 import TableFilterActions from "./components/actions/TableFilterActions.vue";
+import TableToolbar from "./components/TableToolbar.vue";
 import Pagination from "./components/Pagination.vue";
-import { computed } from "vue";
 
 export default {
-  components: { Table, TableFilterActions, TableFilterView, Pagination },
+  components: {
+    Table,
+    TableFilterActions,
+    TableFilterView,
+    Pagination,
+    TableToolbar,
+  },
   data() {
     return {
       pageSize: 5,
@@ -142,6 +136,7 @@ export default {
       }
     },
   },
+
   computed: {
     filterApplied() {
       return (
