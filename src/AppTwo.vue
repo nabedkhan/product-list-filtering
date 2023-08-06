@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto my-8">
+  <div class="container px-5 mx-auto my-8">
     <div class="p-4 py-5 mb-10 bg-gray-800 rounded-xl">
       <!-- FILTER ACTIONS -->
       <TableFilterActions v-model="filter" :categories="categories" />
@@ -22,6 +22,7 @@
 
     <!-- PAGINATION BLOCK -->
     <Pagination
+      v-model="pageSize"
       :currentPage="pageIndex"
       :pageCount="pageCount"
       @prev="handlePrevPage()"

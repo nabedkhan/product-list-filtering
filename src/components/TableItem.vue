@@ -18,12 +18,12 @@
           alt="Default avatar"
         />
 
-        <span>{{ product.title }}</span>
+        <span class="line-clamp-2">{{ product.title }}</span>
       </div>
     </th>
 
-    <td class="px-6 py-4">
-      {{ toCapitalize(product.category) }}
+    <td class="px-6 py-4 capitalize">
+      {{ product.category }}
     </td>
 
     <td class="px-6 py-4">${{ product.price }}</td>
@@ -84,15 +84,6 @@ export default {
     handleDeleteProduct: { default: () => {} },
     selected: { default: [] },
     handleSelectRow: { default: () => {} },
-  },
-
-  methods: {
-    toCapitalize(text) {
-      return text
-        .split(" ")
-        .map((text) => text.charAt(0).toUpperCase() + text.slice(1))
-        .join(" ");
-    },
   },
 };
 </script>
