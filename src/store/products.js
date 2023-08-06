@@ -1,41 +1,100 @@
 import { defineStore } from "pinia";
+import Swal from "sweetalert2";
+
 import { products } from "../data/products";
 import { categories } from "../data/categories";
 
 export const useProductsStore = defineStore("products", {
   state: () => {
     return {
-      products,
-      categories,
       pageSize: 5,
       pageIndex: 1,
+      selected: [],
+      products: [...products],
+      categories: [...categories],
       filter: { category: "", sort: "", search: "" },
     };
   },
   actions: {
-    handleDeleteProduct(id) {
-      this.products = this.products.filter((item) => item.id !== id);
-    },
-    handleDeleteFilter(key) {
-      this.filter[key] = "";
-    },
-
     handleNextPage() {
       if (this.pageIndex < this.pageCount) {
         this.pageIndex++;
       }
     },
+
     handlePrevPage() {
       if (this.pageIndex > 1) {
         this.pageIndex--;
+      }
+    },
+
+    async handleDeleteProduct(productId) {
+      const { isConfirmed } = await Swal.fire({
+        title: "Are you sure want to delete?",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        icon: "info",
+
+        customClass: {
+          popup: "rounded-xl bg-gray-800 text-gray-200",
+          container: "backdrop-opacity-70",
+          title: "text-3xl",
+          confirmButton: "bg-red-500 focus:shadow-none",
+          cancelButton: "bg-gray-700 focus:shadow-none",
+          icon: "text-red-500 border-red-500",
+        },
+      });
+
+      if (isConfirmed) {
+        this.products = this.products.filter((item) => item.id !== productId);
+      }
+    },
+
+    async handleDeleteSelectedProduct() {
+      const { isConfirmed } = await Swal.fire({
+        title: "Are you sure want to delete?",
+        showCancelButton: true,
+        confirmButtonText: "Delete",
+        icon: "info",
+        customClass: {
+          popup: "rounded-xl bg-gray-800 text-gray-200",
+          container: "backdrop-opacity-70",
+          title: "text-3xl",
+          confirmButton: "bg-red-500 focus:shadow-none",
+          cancelButton: "bg-gray-700 focus:shadow-none",
+          icon: "text-red-500 border-red-500",
+        },
+      });
+      if (isConfirmed) {
+        this.products = this.products.filter(
+          (item) => !this.selected.includes(item.id)
+        );
+        this.selected = [];
+      }
+    },
+
+    handleSelectAllRow(checked) {
+      if (checked) {
+        this.selected = this.filteredProducts.map((item) => item.id);
+      } else {
+        this.selected = [];
+      }
+    },
+
+    handleSelectRow(checked, productId) {
+      if (checked) {
+        this.selected.push(productId);
+      } else {
+        this.selected = this.selected.filter((id) => id != productId);
       }
     },
   },
 
   getters: {
     filterApplied() {
-      const keys = Object.keys(this.filter);
-      return keys.filter((item) => this.filter[item]).length > 0;
+      return (
+        Object.keys(this.filter).filter((item) => this.filter[item]).length > 0
+      );
     },
 
     filteredProducts() {
@@ -71,7 +130,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     pageCount() {
-      return this.filteredProducts.length / this.pageSize;
+      return Math.ceil(this.filteredProducts.length / this.pageSize);
     },
 
     filteredProductsWithPagination() {

@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center gap-3 mt-5">
-    <div v-for="key in keys" :key="key">
+  <div class="flex items-center gap-3 mt-5" v-if="filterApplied">
+    <div v-for="key in Object.keys(filter)" :key="key">
       <Chip
-        v-if="modelValue[key]"
-        :title="modelValue[key]"
+        v-if="filter[key]"
+        :title="filter[key]"
         :handleDeleteFilter="() => handleDelete(key)"
       />
     </div>
@@ -11,24 +11,21 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
 import Chip from "../Chip.vue";
+import { useProductsStore } from "../../store/products";
 
 export default {
-  props: {
-    modelValue: { type: Object, required: true, default: {} },
-  },
   components: { Chip },
 
   methods: {
     handleDelete(key) {
-      this.$emit("update:modelValue", { ...this.modelValue, [key]: "" });
+      this.filter[key] = "";
     },
   },
 
   computed: {
-    keys() {
-      return Object.keys(this.modelValue);
-    },
+    ...mapState(useProductsStore, ["filter", "filterApplied"]),
   },
 };
 </script>

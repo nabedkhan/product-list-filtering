@@ -23,18 +23,15 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProductsStore } from "../store/products";
 export default {
-  props: {
-    selected: {
-      type: Array,
-      required: true,
-      default: [],
-    },
-    handleDeleteSelectedProduct: {
-      type: Function,
-      required: true,
-      default: () => {},
-    },
+  computed: {
+    ...mapState(useProductsStore, ["selected"]),
+  },
+
+  methods: {
+    ...mapActions(useProductsStore, ["handleDeleteSelectedProduct"]),
   },
 };
 </script>

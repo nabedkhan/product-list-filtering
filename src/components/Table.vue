@@ -9,9 +9,10 @@
               id="select"
               type="checkbox"
               class="w-4 h-4 text-blue-600 bg-transparent border-gray-400 rounded cursor-pointer focus:ring-offset-gray-50 focus:ring-1"
-              @input="handleSelectAllRow($event)"
-              :disabled="products.length === 0"
+              @input="(e) => handleSelectAllRow(e.target.checked)"
+              :disabled="filteredProductsWithPagination.length === 0"
               :indeterminate="selected.length > 0"
+              :checked="selected.length > 0"
             />
           </th>
 
@@ -30,13 +31,13 @@
       <tbody class="divide-y divide-gray-700">
         <!-- TABLE ROW BLOCK -->
         <TableItem
-          v-for="product in products"
+          v-for="product in filteredProductsWithPagination"
           :product="product"
           :key="product.id"
         />
 
         <!-- NOT FOUND PRODUCT MESSAGE -->
-        <tr v-if="products.length === 0">
+        <tr v-if="filteredProductsWithPagination.length === 0">
           <td colspan="7" class="py-24 text-center bg-gray-900">
             <p class="text-2xl">Product Not Found!</p>
           </td>
@@ -47,20 +48,27 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
 import TableItem from "./TableItem.vue";
+import { useProductsStore } from "../store/products";
 
 export default {
   components: { TableItem },
-  props: {
-    products: { type: Array, required: true, default: [] },
-  },
 
   data() {
     return {
       tableHead: ["Name", "Category", "Price", "Rating", "Action"],
     };
   },
+  computed: {
+    ...mapState(useProductsStore, [
+      "selected",
+      "filteredProductsWithPagination",
+    ]),
+  },
 
-  inject: ["selected", "handleSelectAllRow"],
+  methods: {
+    ...mapActions(useProductsStore, ["handleSelectAllRow"]),
+  },
 };
 </script>

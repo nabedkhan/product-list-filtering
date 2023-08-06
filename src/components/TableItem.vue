@@ -5,12 +5,12 @@
         id="select"
         type="checkbox"
         :checked="selected.includes(product.id)"
-        @input="handleSelectRow($event, product.id)"
+        @input="(e) => handleSelectRow(e.target.checked, product.id)"
         class="w-4 h-4 text-blue-600 bg-transparent border-gray-600 rounded cursor-pointer focus:ring-offset-gray-800 focus:ring-1"
       />
     </td>
 
-    <th class="max-w-xs px-6 py-4 font-medium">
+    <td class="max-w-xs px-6 py-4 font-medium">
       <div class="inline-flex items-center gap-4">
         <img
           class="rounded w-14 h-14"
@@ -20,10 +20,10 @@
 
         <span>{{ product.title }}</span>
       </div>
-    </th>
+    </td>
 
-    <td class="px-6 py-4">
-      {{ toCapitalize(product.category) }}
+    <td class="px-6 py-4 capitalize">
+      {{ product.category }}
     </td>
 
     <td class="px-6 py-4">${{ product.price }}</td>
@@ -54,7 +54,10 @@
     </td>
 
     <td class="px-6 py-4 text-2xl">
-      <span class="cursor-pointer" @click="handleDeleteProduct(product.id)">
+      <span
+        class="cursor-pointer"
+        @click="() => handleDeleteProduct(product.id)"
+      >
         &times;
       </span>
     </td>
@@ -62,37 +65,20 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import { useProductsStore } from "../store/products";
+
 export default {
   props: {
-    product: {
-      type: Object,
-      required: true,
-      default: {
-        id: 1,
-        title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        price: 109.95,
-        description:
-          "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        category: "men's clothing",
-        image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-        rating: { rate: 3.9, count: 120 },
-      },
-    },
+    product: { type: Object, required: true, default: {} },
   },
 
-  inject: {
-    handleDeleteProduct: { default: () => {} },
-    selected: { default: [] },
-    handleSelectRow: { default: () => {} },
+  computed: {
+    ...mapState(useProductsStore, ["selected"]),
   },
 
   methods: {
-    toCapitalize(text) {
-      return text
-        .split(" ")
-        .map((text) => text.charAt(0).toUpperCase() + text.slice(1))
-        .join(" ");
-    },
+    ...mapActions(useProductsStore, ["handleDeleteProduct", "handleSelectRow"]),
   },
 };
 </script>
