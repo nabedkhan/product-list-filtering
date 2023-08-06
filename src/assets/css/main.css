@@ -6,3 +6,11 @@ body {
   font-family: "Inter", sans-serif;
   @apply bg-slate-900;
 }
+
+.simplebar-track.simplebar-horizontal {
+  @apply h-2.5;
+}
+
+.simplebar-scrollbar:before {
+  @apply bg-gray-500;
+}

@@ -1,9 +1,18 @@
-import "./assets/css/main.css";
-
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+// SIMPLEBAR SCROLL
+import Scrollbar from "simplebar-vue";
+
 import App from "./AppTwo.vue";
 
+// STYLES
+import "simplebar-vue/dist/simplebar.min.css";
+import "./assets/css/main.css";
+
+const app = createApp(App);
 const pinia = createPinia();
 
-createApp(App).use(pinia).mount("#app");
+app.component("Scrollbar", Scrollbar);
+app.use(pinia);
+
+app.mount("#app");

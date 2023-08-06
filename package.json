@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.6",
+    "simplebar-vue": "^2.3.3",
     "sweetalert2": "^11.7.20",
     "vue": "^3.3.4"
   },

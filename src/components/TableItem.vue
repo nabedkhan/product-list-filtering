@@ -6,20 +6,20 @@
         type="checkbox"
         :checked="selected.includes(product.id)"
         @input="handleSelectRow($event, product.id)"
-        class="w-4 h-4 text-blue-600 bg-transparent border-gray-600 rounded focus:ring-offset-gray-800 focus:ring-1"
+        class="w-4 h-4 text-blue-600 bg-transparent border-gray-600 rounded cursor-pointer focus:ring-offset-gray-800 focus:ring-1"
       />
     </td>
 
-    <td class="px-6 py-4">
-      <img
-        class="rounded w-14 h-14"
-        :src="product.image"
-        alt="Default avatar"
-      />
-    </td>
+    <th class="max-w-xs px-6 py-4 font-medium">
+      <div class="inline-flex items-center gap-4">
+        <img
+          class="rounded w-14 h-14"
+          :src="product.image"
+          alt="Default avatar"
+        />
 
-    <th class="px-6 py-4 font-medium">
-      {{ product.title.substring(0, 40) }}...
+        <span>{{ product.title }}</span>
+      </div>
     </th>
 
     <td class="px-6 py-4">
