@@ -51,6 +51,7 @@
 import { mapActions, mapState } from "pinia";
 import TableItem from "./TableItem.vue";
 import { useProductsStore } from "../store/products";
+import { useProductPagination } from "../store/pagination";
 
 export default {
   components: { TableItem },
@@ -61,10 +62,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(useProductsStore, [
-      "selected",
-      "filteredProductsWithPagination",
-    ]),
+    ...mapState(useProductsStore, ["selected"]),
+    ...mapState(useProductPagination, ["filteredProductsWithPagination"]),
   },
 
   methods: {

@@ -69,6 +69,7 @@
 <script>
 import { mapState } from "pinia";
 import { useProductsStore } from "../../store/products";
+import { useProductFilterStore } from "../../store/filter";
 export default {
   methods: {
     updateValue(key, value) {
@@ -77,7 +78,8 @@ export default {
   },
 
   computed: {
-    ...mapState(useProductsStore, ["filter", "categories"]),
+    ...mapState(useProductsStore, ["categories"]),
+    ...mapState(useProductFilterStore, ["filter"]),
   },
 };
 </script>

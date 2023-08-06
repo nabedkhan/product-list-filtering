@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 // SIMPLEBAR SCROLL
 import Scrollbar from "simplebar-vue";
 
-import App from "./AppTwo.vue";
+import App from "./App.vue";
 
 // STYLES
 import "simplebar-vue/dist/simplebar.min.css";

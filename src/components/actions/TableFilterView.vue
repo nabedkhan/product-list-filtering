@@ -13,7 +13,7 @@
 <script>
 import { mapState } from "pinia";
 import Chip from "../Chip.vue";
-import { useProductsStore } from "../../store/products";
+import { useProductFilterStore } from "../../store/filter";
 
 export default {
   components: { Chip },
@@ -25,7 +25,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useProductsStore, ["filter", "filterApplied"]),
+    ...mapState(useProductFilterStore, ["filter", "filterApplied"]),
   },
 };
 </script>

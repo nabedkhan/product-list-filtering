@@ -33,15 +33,15 @@
 
 <script>
 import { mapActions, mapState } from "pinia";
-import { useProductsStore } from "../store/products";
+import { useProductPagination } from "../store/pagination";
 
 export default {
   computed: {
-    ...mapState(useProductsStore, ["pageIndex", "pageCount"]),
+    ...mapState(useProductPagination, ["pageIndex", "pageCount"]),
   },
 
   methods: {
-    ...mapActions(useProductsStore, ["handleNextPage", "handlePrevPage"]),
+    ...mapActions(useProductPagination, ["handleNextPage", "handlePrevPage"]),
   },
 };
 </script>
