@@ -1,14 +1,20 @@
-# vue-router
+## Product List Filtering
 
-This template should help get you started developing with Vue 3 in Vite.
+Live Demo: https://product-filtering-vue.netlify.app
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Category-Based Products Filter
+- Price Based Products Sorting
+- Search-Based Products Filter
+- Products Pagination
+- Products Page Count Option
 
-## Customize configuration
+## Tools
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- [Pinia](https://pinia.vuejs.org)
+- [Sweet Alert 2](https://sweetalert2.github.io)
+- [Simplebar](https://grsmto.github.io/simplebar/)
 
 ## Project Setup
 
